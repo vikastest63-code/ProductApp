@@ -19,7 +19,7 @@ public class ProductController {
 
 
 
-    @PostMapping("/saved")
+    @PostMapping("/save")
     public ResponseEntity<ProductResponse>createProduct(@RequestBody ProductRequest productRequest)
     {
 
