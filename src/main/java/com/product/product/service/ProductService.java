@@ -15,5 +15,8 @@ public interface ProductService  {
         List< ProductResponse > getAllProduct();
 
 
+        List<ProductResponse>productByName(String name);
+
+
 
 }

@@ -43,4 +43,13 @@ public class ProductServiceImpl  implements  ProductService{
 
 
     }
+
+    @Override
+    public List<ProductResponse> productByName(String name) {
+
+     List<Product>products=  productRepository.findByName(name);
+
+    return  products.stream().map(ProductMapper::toProductResponse).
+             collect(Collectors.toList());
+    }
 }

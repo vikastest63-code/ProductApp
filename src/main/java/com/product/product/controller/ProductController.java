@@ -35,4 +35,14 @@ public class ProductController {
         return ResponseEntity.ok().body(listOfProduct);
     }
 
+
+    @GetMapping("/{name}")
+    public ResponseEntity<List<ProductResponse>>productByName(@PathVariable("name")String name)
+    {
+
+        List<ProductResponse>products=  productService.productByName(name);
+
+        return ResponseEntity.ok().body(products);
+    }
+
 }
