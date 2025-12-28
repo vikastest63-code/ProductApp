@@ -1,5 +1,6 @@
 package com.product.product.service;
 
+import com.product.product.exception.ProductNotFoundException;
 import com.product.product.mapper.ProductMapper;
 import com.product.product.model.Product;
 import com.product.product.repository.ProductRepository;
@@ -7,6 +8,9 @@ import com.product.product.request.ProductRequest;
 import com.product.product.response.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl  implements  ProductService{
@@ -19,6 +23,23 @@ public class ProductServiceImpl  implements  ProductService{
       Product product=  productRepository.save(ProductMapper.toEntity(productRequest));
 
       return ProductMapper.toProductResponse(product);
+
+
+    }
+
+    @Override
+    public List<ProductResponse> getAllProduct() {
+
+     List<Product> product=  productRepository.findAll();
+
+     if(product.isEmpty())
+     {
+         throw new  ProductNotFoundException("Product list is empty");
+     }
+
+     return product.stream().map(ProductMapper::toProductResponse).
+             collect(Collectors.
+             toList());
 
 
     }
